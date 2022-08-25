@@ -20,29 +20,22 @@ function Calculadora() {
         document.addEventListener('click', e => {
             const el = e.target;
 
-            if(el.classList.contains('btn-num')) {
-                this.botoesDisplay(el.innerText);
-            }
-            if(el.classList.contains('btn-clear')) {
-                this.clearDisplay();
-            }
-            if(el.classList.contains('btn-del')) {
-                this.apagaUm();
-            }
-            if(el.classList.contains('btn-eq')) {
-                this.realizaConta();
-            }
+            if(el.classList.contains('btn-num')) this.botoesDisplay(el);
+            if(el.classList.contains('btn-clear')) this.clearDisplay();
+            if(el.classList.contains('btn-del')) this.apagaUm();
+            if(el.classList.contains('btn-eq')) this.realizaConta();
+            
         });
     }
-    this.botoesDisplay = valor => {
-        this.display.value += valor;
-    }
-    this.clearDisplay = () => {
-        this.display.value = '';
-    }
-    this.apagaUm = () => {
-        this.display.value = this.display.value.slice(0, -1);
-    }
+    this.botoesDisplay = el => {
+        this.display.value += el.innerText;
+        this.display.focus();
+    };
+
+    this.clearDisplay = () => this.display.value = '';
+
+    this.apagaUm = () => this.display.value = this.display.value.slice(0, -1);
+
     this.realizaConta = () => {
         let conta = this.display.value;
 
@@ -59,8 +52,6 @@ function Calculadora() {
             return;
         }
     }
-
-
 }
 const calc = new Calculadora();
 calc.inicia();
